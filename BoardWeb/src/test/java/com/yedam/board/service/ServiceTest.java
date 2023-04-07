@@ -1,6 +1,6 @@
 package com.yedam.board.service;
 
-import java.util.List;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.yedam.board.domain.BoardVO;
+import com.yedam.board.domain.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -22,9 +23,16 @@ public class ServiceTest {
 	private BoardService service;
 	
 	
-	public void getList(){
-		
-		service.getList(); 
+	
+	
+	
+	@Test
+	public void listTist(){
+		Criteria cri = new Criteria(1, 10);
+		cri.setType("TCW");
+		cri.setKeyword("user03");
+		//cri.setPageNum(2);
+		service.getList(cri).forEach(board-> log.info(board)); 
 	}
 	
 	
@@ -52,7 +60,7 @@ public class ServiceTest {
 		}
 	}
 	
-	@Test
+	
 	public void removeTest() {
 		
 		if(service.remove(9L)) {
