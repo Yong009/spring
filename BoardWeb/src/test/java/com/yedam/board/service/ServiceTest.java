@@ -18,52 +18,44 @@ import lombok.extern.log4j.Log4j;
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 @Log4j
 public class ServiceTest {
-	
+
 	@Setter(onMethod_ = @Autowired)
 	private BoardService service;
-	
-	
-	
-	
-	
+
 	@Test
-	public void listTist(){
+	public void listTist() {
 		Criteria cri = new Criteria(1, 10);
 		cri.setType("TCW");
 		cri.setKeyword("user03");
-		//cri.setPageNum(2);
-		service.getList(cri).forEach(board-> log.info(board)); 
+		// cri.setPageNum(2);
+		service.getList(cri).forEach(board -> log.info(board));
 	}
-	
-	
-	
+
 	public void registerTest() {
 		BoardVO board = new BoardVO();
 		board.setTitle("새글등록");
 		board.setContent("글본문입니다");
 		board.setWriter("user04");
-		log.info("등록전: "+ board);
+		log.info("등록전: " + board);
 		service.register(board);
 		log.info("등록후" + board);
 	}
-	
-	
+
 	public void modifyTest() {
 		BoardVO board = new BoardVO();
 		board.setTitle("수정하자");
 		board.setContent("수정 성공했어용");
 		board.setBno(5L);
-		if(service.modify(board)) {
+		if (service.modify(board)) {
 			log.info("성공");
-		}else {
+		} else {
 			log.info("실패");
 		}
 	}
-	
-	
+
 	public void removeTest() {
-		
-		if(service.remove(9L)) {
+
+		if (service.remove(9L)) {
 			log.info("성공");
 		} else {
 			log.info("실패");
