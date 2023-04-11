@@ -42,7 +42,7 @@ var replyService = (function () {
         $.getJSON('/replies/pages/' + bno + '/' + page + '.json', function (data) {
             if (callback) {
                 //console.log(data)
-                callback(data);
+                callback(data.replyCnt,data.list);
             }
         }).fail(function (err) {
             if (error) {
