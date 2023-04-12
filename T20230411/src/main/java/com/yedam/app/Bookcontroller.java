@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.yedam.domain.BookVO;
 import com.yedam.service.BookService;
@@ -22,8 +22,8 @@ public class Bookcontroller {
 	private BookService bookService;
 	
 	@GetMapping("index")
-	public void start() {
-		
+	public String start() {
+		return "index";
 	}
 	
 	@RequestMapping(value="register",method = RequestMethod.POST)

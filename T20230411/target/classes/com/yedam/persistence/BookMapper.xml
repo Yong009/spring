@@ -6,7 +6,10 @@
   <mapper namespace="com.yedam.persistence.BookMapper">
   	
   	<insert id="insertBook" parameterType="com.yedam.domain.BookVO">
-  		insert into book_tbl_06 values(#{bookNo},#{bookName},#{bookCoverImg},#{bookDate},#{bookPrice},#{bookPublisher},#{bookInfo})
+  		<selectKey keyProperty="bookNo" order="BEFORE" resultType="int">
+  			select seq_book.nextval from dual
+  		</selectKey>
+  		insert into book_tbl_06 values(seq_book.nextval,#{bookName},#{bookCoverImg},#{bookDate},#{bookPrice},#{bookPublisher},#{bookInfo})
   	</insert>
   
   
