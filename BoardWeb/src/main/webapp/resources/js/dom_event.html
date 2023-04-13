@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .fruit {
+            color: blue
+        }
+    </style>
+
+</head>
+
+<body>
+    <input id="txt"><button type="button" id="btn">등록</button>
+    <div id="result">
+            <div class="fruit" data-cnt="1">사과</div>
+            <div class="fruit" data-cnt="2">배</div>
+
+
+    </div>
+    <script>
+        //div.fruit 클릭 이벤트 : 직접 이벤트 -> 그룹이벤트
+        let fruitList = document.querySelectorAll(".fruit")
+
+        for(var i=0; i<fruitList.length; i++){
+            fruitList[i].addEventListener('click',function(){
+                alert(this.getAttribute("data-cnt"));
+            })
+        }
+        //클릭된 태그의 data-cnt 속성값을 alert 출력
+        
+
+
+        //등록버튼을 클릭 이벤트 : addEventListener
+        document.getElementsByTagName("button")[0].addEventListener("click", function () {
+            //input 태그값을 div에 추가 : innerHTML
+            //document.querySelector("#result").innerHTML += `<div class=fruit data-cnt="1">${txt.value}</div>`;
+            let div = document.createElement('div') // 태그 생성
+            div.innerText = txt.value; //태그내용 변경
+            div.classList.add("fruit"); //클래스 추가
+            div.setAttribute("data-cnt","1");
+            div.addEventListener('click',function(){
+                alert(this.getAttribute("data-cnt"));
+            })
+            result.append(div); //부모태그에 추가
+        });
+            
+        
+    </script>
+</body>
+
+</html>

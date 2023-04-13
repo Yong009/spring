@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .fruit {
+            color: blue
+        }
+    </style>
+
+</head>
+
+<body>
+    <input id="txt"><button type="button" id="btn">등록</button>
+    <div id="result">
+        <div data-cnt="1"><span class="fruit">사과</span><span>대구</span></div>
+        <div>2000</div>
+        <div data-cnt="2"><span class="fruit">배</span><span>부산</span></div>
+        <div>1000</div>
+
+    </div>
+    <script>
+        //div.fruit 클릭 이벤트 : 직접 이벤트 -> 그룹이벤트
+        result.addEventListener("click", function () {
+            if (event.target.classList.contains("fruit")) {
+                let cnt = window.event.target.getAttribute("data-cnt");      //let cnt = e.target.getAttribute("data-cnt");
+                alert(cnt);
+
+               
+               
+                //과일명, 금액
+               let name = document.querySelector('.fruit').innerHTML;
+               let data = document.querySelector('.fruit').parentElement.getAttribute("data-cnt");
+               let location = document.querySelector('.fruit').nextElementSibling.innerHTML;
+               let price = document.querySelector('#result').twicechildElement.innerHTML;
+               
+               alert(data)
+               alert(name)
+               alert(location)
+               alert(price)
+            }
+        })
+
+        //클릭된 태그의 data-cnt 속성값을 alert 출력
+
+
+
+        //등록버튼을 클릭 이벤트 : addEventListener
+        document.getElementsByTagName("button")[0].addEventListener("click", function () {
+            //input 태그값을 div에 추가 : innerHTML
+            //document.querySelector("#result").innerHTML += `<div class=fruit data-cnt="1">${txt.value}</div>`;
+            let div = document.createElement('div') // 태그 생성
+            div.innerText = txt.value; //태그내용 변경
+            div.classList.add("fruit"); //클래스 추가
+            div.setAttribute("data-cnt", "1");
+            result.append(div); //부모태그에 추가
+        });
+    </script>
+</body>
+
+</html>

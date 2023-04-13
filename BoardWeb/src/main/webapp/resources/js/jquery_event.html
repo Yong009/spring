@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery_event.html</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.js"
+        integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <style>
+        .fruit {
+            color: blue
+        }
+    </style>
+
+</head>
+
+<body>
+    <input id="txt"><button type="button" id="btn">등록</button>
+    <div id="result">
+        <div class="fruit" data-cnt="1"><span>사과</span><span>대구</span></div>
+        <div>2000</div>
+        <div class="fruit" data-cnt="2"><span>배</span><span>부산</span></div>
+        <div>1000</div>
+
+    </div>
+    <script>
+        //div.fruit 클릭 이벤트 : 직접 이벤트 -> 그룹이벤트
+        $('#result').on("click",function () {
+            let fruit = $(event.target);
+              
+            //과일명, 금액
+                
+                let cnt = fruit.attr("data-cnt"); //let cnt = e.target.getAttribute("data-cnt");
+                let name = fruit.children().eq(0).html(); //fruit.children().first().html()
+                let price = fruit.next().html();
+
+                alert(`${cnt} ${name} ${price}`);
+
+            
+        })
+
+        //클릭된 태그의 data-cnt 속성값을 alert 출력
+
+
+
+        // //등록버튼을 클릭 이벤트 : addEventListener
+        // document.getElementsByTagName("button")[0].addEventListener("click", function () {
+        //     //input 태그값을 div에 추가 : innerHTML
+        //     //document.querySelector("#result").innerHTML += `<div class=fruit data-cnt="1">${txt.value}</div>`;
+        //     let div = document.createElement('div') // 태그 생성
+        //     div.innerText = txt.value; //태그내용 변경
+        //     div.classList.add("fruit"); //클래스 추가
+        //     div.setAttribute("data-cnt", "1");
+        //     result.append(div); //부모태그에 추가
+        // });
+    </script>
+</body>
+
+</html>

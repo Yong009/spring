@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .fruit {
+            color: blue
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.js"
+        integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <input id="txt"><button type="button" id="btn">등록</button>
+    <div id="result">
+        <div class="fruit" data-cnt="1">사과</div>
+        <div class="fruit" data-cnt="2">배</div>
+    </div>
+
+    <script>
+        $("#btn").on('click', function () {
+           let div = $("<div>");
+           div.html($('#txt').val())
+           .addClass("fruit")
+           .attr("data-cnt","1")   //div.data("cnt","1")
+           .on("click",function(){
+               let cnt = $(this).attr("data-cnt")
+               alert(cnt);
+            })
+            .appendTo($('#result'))
+            //$('#result').append(div);
+        });
+    </script>
+
+    </head>
+
+    <body>
+
+    </body>
+
+</html>
