@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery_ajax.html</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.js"
+        integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <input id="dt">
+    <button id="btn">조회</button>
+
+    <div id="result"></div>
+    <div id="info"></div>
+    <script>
+        // 박스오피스 조회 이벤트 핸들러
+        $('#btn').on("click", function () {
+
+            
+
+            let url =
+                "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json";
+
+            $.ajax({
+                url,
+                // method : get,
+                data: {key: "f5eef3421c602c6cb7ea224104795888", targetDt: dt.value},
+                //contentType :
+                dataType: "json"
+
+            }).done(function (response) {
+
+                let list = response.boxOfficeResult.dailyBoxOfficeList
+
+                for (mv of list) {
+                    $('#result').append(`<div><span class="movie">${mv.movieCd}</span>${mv.movieNm}</div>`);
+                }
+            })
+
+
+        });
+
+        // 비동기 방식으로 Request를 오픈한다
+
+        // XMLHttpRequest.readyState 프로퍼티가 변경(이벤트 발생)될 때마다 콜백함수(이벤트 핸들러)를 호출한다.
+
+
+
+
+
+        // 영화 상세정보 이벤트 핸들러
+        $('#result').on("click", function () {
+           
+            let url ="https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json";
+
+
+            $.ajax({
+                url,
+                data: {key:"f5eef3421c602c6cb7ea224104795888",movieCd: event.target.innerHTML},
+                dataType:"json"
+            }).done(function(response){
+
+                info.innerHTML = "";
+
+                
+                let list = response.movieInfoResult.movieInfo.directors;
+                let list2 = response.movieInfoResult.movieInfo.actors
+               
+                console.log(list);
+                for (mv of list) {
+                    $('#info').append(`<div><span class="dr">${mv.peopleNm}</span></div>`);
+
+                }
+
+                for (ms of list2) {
+                    $('#info').append( `<div><span class="at">${ms.peopleNm}</span></div>`);
+                }
+
+                
+            });
+
+            // 비동기 방식으로 Request를 오픈한다
+           
+
+          
+
+
+            
+
+        });
+    </script>
+</body>
+
+</html>

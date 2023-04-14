@@ -50,6 +50,7 @@
             
             // XMLHttpRequest 객체의 생성
             var xhr = new XMLHttpRequest();
+            
             // 비동기 방식으로 Request를 오픈한다
             let url = 
                 "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd="+event.target.innerHTML;
@@ -59,14 +60,18 @@
 
             // XMLHttpRequest.readyState 프로퍼티가 변경(이벤트 발생)될 때마다 콜백함수(이벤트 핸들러)를 호출한다.
             xhr.onload = function (e) {
+              
                 // 이 함수는 Response가 클라이언트에 도달하면 호출된다.
-                let obj = JSON.parse(xhr.responseText);
+                // 로딩 이미지 hide
 
+                info.innerHTML="";
+                
+                let obj = JSON.parse(xhr.responseText);
                 let list = obj.movieInfoResult.movieInfo.directors;
                 let list2 = obj.movieInfoResult.movieInfo.actors
                 console.log(list);
                 
-                document.querySelector('#info').remove;
+                
 
                 for (mv of list) {
                     info.innerHTML += `<div><span class="dr">${mv.peopleNm}</span></div>`
@@ -80,6 +85,7 @@
                 
                 
             };
+            // 로딩이미지 show
             // Request를 전송한다
             xhr.send();
 
